@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Rajdhani&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+
+body {
+  width: 1050px;
+  margin: auto;
+}
+
+div {
+  border-radius: 8px;
+}
+
+header {
+  height: 300px;
+  background-color: pink;
+  margin: 50px;
+}
+h1 {
+  font-size: 50px;
+  text-align: center;
+  margin-top: 50px;
+  padding-top: 100px;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+#image-box {
+  background-color: pink;
+  padding: 20px;
+}
+
+#image-box img {
+  padding: 15px;
+  display: inline-block;
+}
+
+ul {
+  background-color: pink;
+}
+
+li {
+  list-style-type: circle;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+}
+
+#list-box {
+  margin: auto;
+  width: 350px;
+  padding: 50px;
+  margin-top: 50px;
+}
