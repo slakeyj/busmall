@@ -34,23 +34,9 @@ h1 {
   display: inline-block;
 }
 
-ul {
-  background-color: rgb(233, 217, 220);
-}
 
-li {
-  list-style-type: circle;
-  font-family: 'Poppins', sans-serif;
-  font-size: 18px;
-}
-
-#list-box {
-  margin: auto;
-  width: 350px;
-  padding: 50px;
-  margin-top: 50px;
-}
 
 canvas {
   border: 1px solid black;
+  margin-top: 50px;
 }

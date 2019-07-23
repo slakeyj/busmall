@@ -4,7 +4,7 @@ var imageOneEl = document.getElementById('image-one');
 var imageTwoEl = document.getElementById('image-two');
 var imageThreeEl = document.getElementById('image-three');
 var imageBoxEl = document.getElementById('image-box');
-var ulEl = document.getElementById('vote-list');
+
 
 var imageFileNameList = ['banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
@@ -71,7 +71,20 @@ function generateChart() {
           'rgba(255, 206, 86, 0.2)',
           'rgba(75, 192, 192, 0.2)',
           'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
         ],
         borderColor: [
           'rgba(255, 99, 132, 1)',
@@ -105,47 +118,34 @@ function handleClick() {
   }
   clickCount++;
   console.log('clickCount is', clickCount);
-  if (clickCount < 25) {
-    render();
+  if (clickCount < 6) {
+    renderAllImages();
   } else {
     imageBoxEl.removeEventListener('click', handleClick);
-    renderVoteCount();
     generateArrays();
     generateChart();
   }
 }
 
-// CREATE HELPER FUNCTION
-function render() {
-  var pictureIndex = getRandomIndex();
-  allImages[pictureIndex].viewCount++;
-  imageOneEl.src = allImages[pictureIndex].filepath;
-  imageOneEl.alt = allImages[pictureIndex].name;
-  imageOneEl.title = allImages[pictureIndex].name;
-
-  pictureIndex = getRandomIndex();
-  allImages[pictureIndex].viewCount++;
-  imageTwoEl.src = allImages[pictureIndex].filepath;
-  imageTwoEl.alt = allImages[pictureIndex].name;
-  imageTwoEl.title = allImages[pictureIndex].name;
-
-  pictureIndex = getRandomIndex();
-  allImages[pictureIndex].viewCount++;
-  imageThreeEl.src = allImages[pictureIndex].filepath;
-  imageThreeEl.alt = allImages[pictureIndex].name;
-  imageThreeEl.title = allImages[pictureIndex].name;
-}
-
-function renderVoteCount() {
-  for (var i = 0; i < allImages.length; i++) {
-    var liEl = document.createElement('li');
-    liEl.textContent = `${allImages[i].voteCount} votes for ${allImages[i].name}`;
-    ulEl.appendChild(liEl);
+function renderImage(imageElement) {
+  for (var i = 0; i < 3; i++) {
+    var pictureIndex = getRandomIndex();
+    allImages[pictureIndex].viewCount++;
+    imageElement.src = allImages[pictureIndex].filepath;
+    imageElement.alt = allImages[pictureIndex].name;
+    imageElement.title = allImages[pictureIndex].name;
   }
 }
 
+function renderAllImages() {
+  renderImage(imageOneEl);
+  renderImage(imageTwoEl);
+  renderImage(imageThreeEl);
+}
+
+
 imageBoxEl.addEventListener('click', handleClick);
 
-render();
+renderAllImages();
 
 
