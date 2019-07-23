@@ -13,7 +13,7 @@ div {
 
 header {
   height: 300px;
-  background-color: pink;
+  background-color: rgb(255, 195, 205);
   margin: 50px;
 }
 h1 {
@@ -24,8 +24,8 @@ h1 {
   font-family: 'Rajdhani', sans-serif;
 }
 
-#image-box {
-  background-color: pink;
+#image-box {  
+  background-color: rgb(182, 234, 245);
   padding: 20px;
 }
 
@@ -35,7 +35,7 @@ h1 {
 }
 
 ul {
-  background-color: pink;
+  background-color: rgb(233, 217, 220);
 }
 
 li {
@@ -49,4 +49,8 @@ li {
   width: 350px;
   padding: 50px;
   margin-top: 50px;
+}
+
+canvas {
+  border: 1px solid black;
 }

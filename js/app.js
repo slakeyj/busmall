@@ -1,15 +1,12 @@
 'use strict';
 
-
 var imageOneEl = document.getElementById('image-one');
 var imageTwoEl = document.getElementById('image-two');
 var imageThreeEl = document.getElementById('image-three');
-
 var imageBoxEl = document.getElementById('image-box');
-
-var imageNameList = ['banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
-
 var ulEl = document.getElementById('vote-list');
+
+var imageFileNameList = ['banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
 var allImages = [];
 var clickCount = 0;
@@ -23,16 +20,14 @@ function NewImage(filename) {
   allImages.push(this);
 }
 
-// loops through image names and creates new instances of NewImage for each one
-for (var i = 0; i < imageNameList.length; i++) {
-  new NewImage(imageNameList[i]);
+// loops through image file names and creates new instances of NewImage for each one
+for (var i = 0; i < imageFileNameList.length; i++) {
+  new NewImage(imageFileNameList[i]);
 }
 
-// helper functions
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
 
 var recentRandomIndexes = [];
 function getRandomIndex() {
@@ -41,9 +36,9 @@ function getRandomIndex() {
   while (recentRandomIndexes.includes(randomIndex)) {
     randomIndex = getRandomNumber(0, allImages.length - 1);
   }
-
   if (recentRandomIndexes.length > 5) {
     recentRandomIndexes.shift();
+    console.log(recentRandomIndexes);
   }
   recentRandomIndexes.push(randomIndex);
   //console.log(randomIndex);
@@ -51,17 +46,60 @@ function getRandomIndex() {
   return randomIndex;
 }
 
+var imageNamesArray = [];
+var voteCountList = [];
 
+function generateArrays() {
+  for (var j = 0; j < allImages.length; j++) {
+    imageNamesArray.push(allImages[j].name);
+    voteCountList.push(allImages[j].voteCount);
+  }
+}
 
+function generateChart() {
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: imageNamesArray,
+      datasets: [{
+        label: '# of Votes',
+        data: voteCountList,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
 
 function handleClick() {
   var chosenImage = event.target.title;
-  console.log('event.target.title is', event.target.title); // WORKING ON THIS
   for (var i = 0; i < allImages.length; i++) {
-    console.log('I am looping i handleClick: ' + i);
-    console.log('I am about to compare these:', allImages[i], chosenImage);
     if (allImages[i].name === chosenImage) {
-      console.log('I am going to give this one a vote: ' + chosenImage);
       allImages[i].voteCount++;
     }
   }
@@ -72,6 +110,8 @@ function handleClick() {
   } else {
     imageBoxEl.removeEventListener('click', handleClick);
     renderVoteCount();
+    generateArrays();
+    generateChart();
   }
 }
 
@@ -108,4 +148,4 @@ imageBoxEl.addEventListener('click', handleClick);
 
 render();
 
-console.log(allImages);
+
