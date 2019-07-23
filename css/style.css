@@ -1,17 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Rajdhani&display=swap');
+@import url('https://fonts.googleapis.com/css?family=DM+Serif+Display&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 
 
 body {
-  width: 100%;
-  height:auto;
-  margin: auto;
-  background-image: url('../img/bus.jpg');
+  
+  background-image: url('../img/seattle.jpg');
   background-repeat: no-repeat;
-  background-attachment: scroll;
+  background-attachment: fixed;
   background-size: cover;
-  min-height: 100%;
-  min-width: 1024px;
+  
 }
 
 div {
@@ -19,26 +16,26 @@ div {
 }
 
 header {
-  height: 300px;
+  height: 200px;
   margin: 50px;
 }
 
 
 h1 {
   color: white;
-  font-size: 60px;
+  font-size: 80px;
   text-align: center;
-  margin-top: 50px;
-  padding-top: 100px;
-  font-family: 'Rajdhani', sans-serif;
-  text-shadow: 1px 1px 2px black; 
+  padding-top: 40px;
+  font-family: 'DM Serif Display', serif;
+  
 }
 
 #image-box {  
-  background-color: rgba(242, 241, 218, 0.447);
+  background-color: rgba(206, 206, 199, 0.296);
   padding: 20px;
   width: 1080px;
   margin: auto;
+  text-align: center;
 }
 
 #image-box img {
@@ -46,7 +43,25 @@ h1 {
   display: inline-block;
 }
 
+
+
 canvas {
-  margin-top: 50px;
-  background-color: rgba(255, 255, 255, 0.789);
+  margin: 75px 0px;
+  background-color: rgba(255, 255, 255, 0.789); 
+  
 }
+
+.data-box {
+  top: 750px;
+  left: 300px;
+  width: 800px;
+  height: 400px;
+  position: absolute;
+}
+
+#myPie {
+  margin-top: 500px;
+}
+
+
+

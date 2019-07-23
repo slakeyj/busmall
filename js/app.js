@@ -6,7 +6,7 @@ var imageThreeEl = document.getElementById('image-three');
 var imageBoxEl = document.getElementById('image-box');
 
 
-var imageFileNameList = ['banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
+var imageFileNameList = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
 var allImages = [];
 var clickCount = 0;
@@ -85,6 +85,7 @@ function generateChart() {
           'rgba(153, 102, 255, 0.6)',
           'rgba(255, 159, 64, 0.6)',
           'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
         ],
         borderColor: [
           'rgba(255, 99, 132, 1)',
@@ -105,7 +106,9 @@ function generateChart() {
           'rgba(75, 192, 192, 1)',
           'rgba(153, 102, 255, 1)',
           'rgba(255, 159, 64, 1)',
-          'rgba(255, 99, 132, 1)'
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+
         ],
         borderWidth: 1
       }]
@@ -122,6 +125,51 @@ function generateChart() {
   });
 }
 
+function generatePieChart() {
+  var ctx = document.getElementById('myPie').getContext('2d');
+  new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'pie',
+
+    // The data for our dataset
+    data: {
+      labels: imageNamesArray,
+      datasets: [{
+        label: 'Top Votes',
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 159, 64, 0.6)',
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 159, 64, 0.6)',
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 159, 64, 0.6)',
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)'
+        ],
+        borderWidth: 1,
+        borderColor: 'rgba(38, 12, 12, 0.54)',
+        data: voteCountList
+      }]
+    },
+
+    // Configuration options go here
+    options: {}
+  });
+}
+
+
 function handleClick() {
   var chosenImage = event.target.title;
   for (var i = 0; i < allImages.length; i++) {
@@ -131,12 +179,13 @@ function handleClick() {
   }
   clickCount++;
   console.log('clickCount is', clickCount);
-  if (clickCount < 6) {
+  if (clickCount < 25) {
     renderAllImages();
   } else {
     imageBoxEl.removeEventListener('click', handleClick);
     generateArrays();
     generateChart();
+    generatePieChart();
   }
 }
 
@@ -151,6 +200,7 @@ function renderImage(imageElement) {
 }
 
 function renderAllImages() {
+
   renderImage(imageOneEl);
   renderImage(imageTwoEl);
   renderImage(imageThreeEl);
@@ -160,5 +210,7 @@ function renderAllImages() {
 imageBoxEl.addEventListener('click', handleClick);
 
 renderAllImages();
+
+
 
 
