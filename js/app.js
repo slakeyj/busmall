@@ -4,12 +4,10 @@ var imageOneEl = document.getElementById('image-one');
 var imageTwoEl = document.getElementById('image-two');
 var imageThreeEl = document.getElementById('image-three');
 var imageBoxEl = document.getElementById('image-box');
-
-
-var imageFileNameList = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
-
 var allImages = [];
 var clickCount = 0;
+
+var imageFileNameList = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
 function NewImage(filename) {
   this.name = filename.split('.')[0];
@@ -34,18 +32,15 @@ var recentRandomIndexes = [];
 
 function getRandomIndex() {
   var randomIndex = getRandomNumber(0, allImages.length - 1);
-
   while (recentRandomIndexes.includes(randomIndex)) {
     randomIndex = getRandomNumber(0, allImages.length - 1);
   }
-
   if (recentRandomIndexes.length > 5) {
     recentRandomIndexes.shift();
     console.log(recentRandomIndexes);
   }
   recentRandomIndexes.push(randomIndex);
   //console.log(randomIndex);
-
   return randomIndex;
 }
 
@@ -63,7 +58,6 @@ function generateVotePercentage() {
   var imageVotePercentageList = [];
   for (var i = 0; i < allImages.length; i++) {
     var percentages = Math.round((allImages[i].voteCount / allImages[i].viewCount) * 100);
-
     imageVotePercentageList.push(percentages);
   }
   return imageVotePercentageList;
@@ -211,12 +205,10 @@ function renderImage(imageElement) {
 }
 
 function renderAllImages() {
-
   renderImage(imageOneEl);
   renderImage(imageTwoEl);
   renderImage(imageThreeEl);
 }
-
 
 imageBoxEl.addEventListener('click', handleClick);
 
