@@ -4,6 +4,7 @@ var imageOneEl = document.getElementById('image-one');
 var imageTwoEl = document.getElementById('image-two');
 var imageThreeEl = document.getElementById('image-three');
 var imageBoxEl = document.getElementById('image-box');
+var buttonEl = document.getElementById('clear-button');
 var allImages = [];
 var clickCount = 0;
 
@@ -18,15 +19,31 @@ function NewImage(filename) {
   allImages.push(this);
 }
 
-// loops through image file names and creates new instances of NewImage for each one
-for (var i = 0; i < imageFileNameList.length; i++) {
-  new NewImage(imageFileNameList[i]);
+
+if (localStorage.length === 0) {
+  for (var i = 0; i < imageFileNameList.length; i++) {
+    new NewImage(imageFileNameList[i]);
+  }
+} else {
+  getLocalStorage();
+}
+
+// LOCAL STORAGE
+function getLocalStorage() {
+  var getLocalStorage = localStorage.getItem('images');
+  var parsedLocalStorage = JSON.parse(getLocalStorage);
+  allImages = parsedLocalStorage;
+}
+
+function setLocalStorage() {
+  var stringifiedData = JSON.stringify(allImages);
+  localStorage.setItem('images', stringifiedData);
+
 }
 
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
 
 var recentRandomIndexes = [];
 
@@ -63,6 +80,7 @@ function generateVotePercentage() {
   return imageVotePercentageList;
 }
 
+// CHARTS
 function generateChart() {
   var ctx = document.getElementById('myChart').getContext('2d');
   new Chart(ctx, {
@@ -175,42 +193,17 @@ function generatePieChart() {
     options: {}
   });
 }
-// LOCAL STORAGE
-// function setLocalStorage() {
-//   console.log('Setting');
-//   var stringifiedImages = JSON.stringify(allImages);
-//   localStorage.setItem('images', stringifiedImages);
-// }
-// var parsedAllImages = [];
-// function parseLocalStorage(keyName) {
-//   var storage = localStorage.getItem(keyName);
-//   parsedAllImages = JSON.parse(storage);
-//   return parsedAllImages;
-// }
 
-// function checkForLocalStorage() {
-//   if (localStorage.length > 0) {
-//     parseLocalStorage();
-//   } else {
-//     setLocalStorage();
-//   }
-// }
-
-localStorage.setItem('images', JSON.stringify(allImages));
-var localImagesData = JSON.parse(localStorage.getItem('images'));
-
+// EVENT HANDLERS
 function handleClick() {
   var chosenImage = event.target.title;
   for (var i = 0; i < allImages.length; i++) {
     if (allImages[i].name === chosenImage) {
       allImages[i].voteCount++;
-      var stringifiedAllImages = JSON.stringify(allImages)
-      localStorage.setItem('images', stringifiedAllImages);
-      console.log('local all images is', stringifiedAllImages);
     }
   }
   clickCount++;
-  //console.log('clickCount is', clickCount);
+  console.log('clickCount is', clickCount);
   if (clickCount < 25) {
     renderAllImages();
   } else {
@@ -218,13 +211,22 @@ function handleClick() {
     generateArrays();
     generateChart();
     generatePieChart();
+    setLocalStorage();
   }
 }
 
+// location.reload() found at https://www.w3schools.com/jsref/met_loc_reload.asp
+function handleButtonClick() {
+  localStorage.clear();
+  location.reload();
+}
+
+
+// RENDER FUNCTIONS
 function renderImage(imageElement) {
   var pictureIndex = getRandomIndex();
   allImages[pictureIndex].viewCount++;
-  //console.log(`view count of ${allImages[pictureIndex].name} is `, allImages[pictureIndex].viewCount);
+  console.log(`view count of ${allImages[pictureIndex].name} is `, allImages[pictureIndex].viewCount);
   imageElement.src = allImages[pictureIndex].filepath;
   imageElement.alt = allImages[pictureIndex].name;
   imageElement.title = allImages[pictureIndex].name;
@@ -236,7 +238,9 @@ function renderAllImages() {
   renderImage(imageThreeEl);
 }
 
+// EVENT LISTENERS
 imageBoxEl.addEventListener('click', handleClick);
+buttonEl.addEventListener('click', handleButtonClick);
 
 renderAllImages();
 
