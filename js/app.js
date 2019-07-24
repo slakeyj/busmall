@@ -37,7 +37,7 @@ function getRandomIndex() {
   }
   if (recentRandomIndexes.length > 5) {
     recentRandomIndexes.shift();
-    console.log(recentRandomIndexes);
+    //console.log(recentRandomIndexes);
   }
   recentRandomIndexes.push(randomIndex);
   //console.log(randomIndex);
@@ -142,7 +142,7 @@ function generatePieChart() {
     data: {
       labels: imageNamesArray,
       datasets: [{
-        label: 'Top Votes',
+        label: 'Votes per View',
         backgroundColor: [
           'rgba(255, 99, 132, 0.6)',
           'rgba(54, 162, 235, 0.6)',
@@ -175,16 +175,42 @@ function generatePieChart() {
     options: {}
   });
 }
+// LOCAL STORAGE
+// function setLocalStorage() {
+//   console.log('Setting');
+//   var stringifiedImages = JSON.stringify(allImages);
+//   localStorage.setItem('images', stringifiedImages);
+// }
+// var parsedAllImages = [];
+// function parseLocalStorage(keyName) {
+//   var storage = localStorage.getItem(keyName);
+//   parsedAllImages = JSON.parse(storage);
+//   return parsedAllImages;
+// }
+
+// function checkForLocalStorage() {
+//   if (localStorage.length > 0) {
+//     parseLocalStorage();
+//   } else {
+//     setLocalStorage();
+//   }
+// }
+
+localStorage.setItem('images', JSON.stringify(allImages));
+var localImagesData = JSON.parse(localStorage.getItem('images'));
 
 function handleClick() {
   var chosenImage = event.target.title;
   for (var i = 0; i < allImages.length; i++) {
     if (allImages[i].name === chosenImage) {
       allImages[i].voteCount++;
+      var stringifiedAllImages = JSON.stringify(allImages)
+      localStorage.setItem('images', stringifiedAllImages);
+      console.log('local all images is', stringifiedAllImages);
     }
   }
   clickCount++;
-  console.log('clickCount is', clickCount);
+  //console.log('clickCount is', clickCount);
   if (clickCount < 25) {
     renderAllImages();
   } else {
@@ -198,7 +224,7 @@ function handleClick() {
 function renderImage(imageElement) {
   var pictureIndex = getRandomIndex();
   allImages[pictureIndex].viewCount++;
-  console.log(`view count of ${allImages[pictureIndex].name} is `, allImages[pictureIndex].viewCount);
+  //console.log(`view count of ${allImages[pictureIndex].name} is `, allImages[pictureIndex].viewCount);
   imageElement.src = allImages[pictureIndex].filepath;
   imageElement.alt = allImages[pictureIndex].name;
   imageElement.title = allImages[pictureIndex].name;
