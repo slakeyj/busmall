@@ -11,27 +11,43 @@
 </head>
 
 <body>
-  <header>
-    <h1>Please Pick Your Favorite Image</h1>
+  <header id="header-img">
+    <h1>The BusMall Project</h1>
   </header>
   <main>
     <div id="image-box">
-      <img id="image-one" src="" alt="" title="" />
-      <img id="image-two" src="" alt="" title="" />
-      <img id="image-three" src="" alt="" title="" />
+      <h2>Pick Your Favorite Image</h2>
+      <form>
+        <fieldset>
+          <div class="image-choice">
+            <img id="image-one" src="" alt="" title="" />
+            <input type="radio" name="image-one" value="fiction">Select</input>
+          </div>
+          <div class="image-choice">
+            <img id="image-two" src="" alt="" title="" />
+            <input type="radio" name="image-two" value="fiction">Select</input>
+          </div>
+          <div class="image-choice">
+            <img id="image-three" src="" alt="" title="" />
+            <input type="radio" name="image-three" value="fiction">Select</input>
+          </div>
+        </fieldset>
+      </form>
     </div>
 
-    <div id="list-box">
-      <ul id="vote-list">
+    <div class="data-box">
+      <canvas id="myChart" width="0"></canvas>
     </div>
-
-    </ul>
+    <div class="data-box">
+      <canvas id="myPie" width="0"></canvas>
+    </div>
   </main>
   <footer>
 
   </footer>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script type="text/javascript" src="js/app.js"></script>
 
 </html>
