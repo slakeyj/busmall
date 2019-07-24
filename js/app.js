@@ -29,13 +29,16 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+
 var recentRandomIndexes = [];
+
 function getRandomIndex() {
   var randomIndex = getRandomNumber(0, allImages.length - 1);
 
   while (recentRandomIndexes.includes(randomIndex)) {
     randomIndex = getRandomNumber(0, allImages.length - 1);
   }
+
   if (recentRandomIndexes.length > 5) {
     recentRandomIndexes.shift();
     console.log(recentRandomIndexes);
@@ -54,6 +57,16 @@ function generateArrays() {
     imageNamesArray.push(allImages[j].name);
     voteCountList.push(allImages[j].voteCount);
   }
+}
+
+function generateVotePercentage() {
+  var imageVotePercentageList = [];
+  for (var i = 0; i < allImages.length; i++) {
+    var percentages = Math.round((allImages[i].voteCount / allImages[i].viewCount) * 100);
+
+    imageVotePercentageList.push(percentages);
+  }
+  return imageVotePercentageList;
 }
 
 function generateChart() {
@@ -160,7 +173,7 @@ function generatePieChart() {
         ],
         borderWidth: 1,
         borderColor: 'rgba(38, 12, 12, 0.54)',
-        data: voteCountList
+        data: generateVotePercentage()
       }]
     },
 
@@ -168,7 +181,6 @@ function generatePieChart() {
     options: {}
   });
 }
-
 
 function handleClick() {
   var chosenImage = event.target.title;
@@ -190,13 +202,12 @@ function handleClick() {
 }
 
 function renderImage(imageElement) {
-  for (var i = 0; i < 3; i++) {
-    var pictureIndex = getRandomIndex();
-    allImages[pictureIndex].viewCount++;
-    imageElement.src = allImages[pictureIndex].filepath;
-    imageElement.alt = allImages[pictureIndex].name;
-    imageElement.title = allImages[pictureIndex].name;
-  }
+  var pictureIndex = getRandomIndex();
+  allImages[pictureIndex].viewCount++;
+  console.log(`view count of ${allImages[pictureIndex].name} is `, allImages[pictureIndex].viewCount);
+  imageElement.src = allImages[pictureIndex].filepath;
+  imageElement.alt = allImages[pictureIndex].name;
+  imageElement.title = allImages[pictureIndex].name;
 }
 
 function renderAllImages() {

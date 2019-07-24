@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=DM+Serif+Display&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Athiti&display=swap');
 
 
 body {
@@ -20,30 +21,50 @@ header {
   margin: 50px;
 }
 
-
+/* info on gradient text found at https://css-tricks.com/snippets/css/gradient-text/*/
 h1 {
   color: white;
   font-size: 80px;
   text-align: center;
   padding-top: 40px;
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Courgette', cursive;
+  background: -webkit-linear-gradient(rgb(255, 253, 253), rgb(127, 159, 194));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
+h2 {
+  color: white;
+  font-size: 50px;
+  text-align: center;
+  padding-top: 40px;
+  font-family: 'Athiti', sans-serif;
+  margin-bottom: 50px;
   
+}
+
+.image-choice {
+  display: inline-block;
+  font-size: 30px;
+  color: white;
 }
 
 #image-box {  
   background-color: rgba(206, 206, 199, 0.296);
   padding: 20px;
   width: 1080px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
 }
 
 #image-box img {
-  padding: 15px;
-  display: inline-block;
+  padding: 12px;
+  margin: 12px;
+  display: block;
+  background-color: rgba(255, 255, 255, 0.577);
 }
-
-
 
 canvas {
   margin: 75px 0px;
@@ -56,11 +77,13 @@ canvas {
   left: 300px;
   width: 800px;
   height: 400px;
-  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  
 }
 
 #myPie {
-  margin-top: 500px;
+  margin-top: 170px;
 }
 
 
