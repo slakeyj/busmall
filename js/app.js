@@ -205,25 +205,33 @@ function generatePieChart() {
 // EVENT HANDLERS
 function handleRadioClick() {
   var chosenImage = event.target.parentElement.id;
-  console.log('event.target.parentElement.id ', chosenImage);
-  console.log('event.target is ', event.target);
+  // console.log('event.target.parentElement.id ', chosenImage);
+  //console.log('event.target is ', event.target);
   selectedImage = chosenImage;
+  console.log('selected image in handleRadioClick ', selectedImage);
 }
 
 function handleVote() {
+  console.log('selected image is ', selectedImage);
   for (var i = 0; i < allImages.length; i++) {
     if (allImages[i].name === selectedImage) {
       allImages[i].voteCount++;
+      console.log(`vote for ${allImages[i].name} is `, allImages[i].voteCount);
     }
   }
   clickCount++;
-  console.log('clickCount is', clickCount);
+  //console.log('clickCount is', clickCount);
   if (clickCount < 25) {
     renderAllImages();
+    radioOneEl.checked = false;
+    radioTwoEl.checked = false;
+    radioThreeEl.checked = false;
   } else {
     radioOneEl.removeEventListener('click', handleRadioClick);
     radioTwoEl.removeEventListener('click', handleRadioClick);
     radioThreeEl.removeEventListener('click', handleRadioClick);
+    voteButtonEl.removeEventListener('click', handleVote);
+
     generateArrays();
     generateChart();
     generatePieChart();
@@ -242,11 +250,11 @@ function renderImage(imageElement) {
   var pictureIndex = getRandomIndex();
   allImages[pictureIndex].viewCount++;
   var name = allImages[pictureIndex].name;
-  console.log(`view count of ${name} is `, allImages[pictureIndex].viewCount);
+  //console.log(`view count of ${name} is `, allImages[pictureIndex].viewCount);
   imageElement.src = allImages[pictureIndex].filepath;
   imageElement.alt = name;
   imageElement.title = name;
-  var divElement = imageElement.parentElement;
+  var divElement = imageElement.closest('.image-choice');
   divElement.id = name;
 }
 

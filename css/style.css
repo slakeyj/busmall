@@ -45,6 +45,11 @@ h2 {
   display: inline-block;
   font-size: 30px;
   color: white;
+  width: 33%;
+}
+
+.image-height {
+  height: 330px;
 }
 
 #image-box {  
