@@ -24,7 +24,6 @@ function NewImage(filename) {
   allImages.push(this);
 }
 
-
 if (localStorage.length === 0) {
   for (var i = 0; i < imageFileNameList.length; i++) {
     new NewImage(imageFileNameList[i]);
@@ -51,7 +50,7 @@ function getRandomNumber(min, max) {
 }
 
 var recentRandomIndexes = [];
-
+// comment
 function getRandomIndex() {
   var randomIndex = getRandomNumber(0, allImages.length - 1);
   while (recentRandomIndexes.includes(randomIndex)) {
@@ -198,8 +197,6 @@ function generatePieChart() {
     options: {}
   });
 }
-
-
 
 // EVENT HANDLERS
 function handleRadioClick() {

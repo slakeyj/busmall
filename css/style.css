@@ -85,8 +85,8 @@ h2 {
 }
 
 #clear-button {
-  width: 150px;
-  height: 2em;
+  width: 130px;
+  font-size: 20px;
 }
 
 canvas {
