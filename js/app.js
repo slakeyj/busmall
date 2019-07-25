@@ -3,7 +3,6 @@
 var imageOneEl = document.getElementById('image-one');
 var imageTwoEl = document.getElementById('image-two');
 var imageThreeEl = document.getElementById('image-three');
-var imageBoxEl = document.getElementById('image-box');
 var buttonEl = document.getElementById('clear-button');
 var radioOneEl = document.getElementById('radio-one');
 var radioTwoEl = document.getElementById('radio-two');
@@ -213,6 +212,9 @@ function handleRadioClick() {
 
 function handleVote() {
   console.log('selected image is ', selectedImage);
+  if (selectedImage === undefined) {
+    return;
+  }
   for (var i = 0; i < allImages.length; i++) {
     if (allImages[i].name === selectedImage) {
       allImages[i].voteCount++;
@@ -226,6 +228,7 @@ function handleVote() {
     radioOneEl.checked = false;
     radioTwoEl.checked = false;
     radioThreeEl.checked = false;
+    selectedImage = undefined;
   } else {
     radioOneEl.removeEventListener('click', handleRadioClick);
     radioTwoEl.removeEventListener('click', handleRadioClick);
