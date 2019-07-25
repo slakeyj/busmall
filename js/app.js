@@ -5,6 +5,12 @@ var imageTwoEl = document.getElementById('image-two');
 var imageThreeEl = document.getElementById('image-three');
 var imageBoxEl = document.getElementById('image-box');
 var buttonEl = document.getElementById('clear-button');
+var radioOneEl = document.getElementById('radio-one');
+var radioTwoEl = document.getElementById('radio-two');
+var radioThreeEl = document.getElementById('radio-three');
+var voteButtonEl = document.getElementById('vote-button');
+var selectedImage = undefined;
+
 var allImages = [];
 var clickCount = 0;
 
@@ -194,11 +200,19 @@ function generatePieChart() {
   });
 }
 
+
+
 // EVENT HANDLERS
-function handleClick() {
-  var chosenImage = event.target.title;
+function handleRadioClick() {
+  var chosenImage = event.target.parentElement.id;
+  console.log('event.target.parentElement.id ', chosenImage);
+  console.log('event.target is ', event.target);
+  selectedImage = chosenImage;
+}
+
+function handleVote() {
   for (var i = 0; i < allImages.length; i++) {
-    if (allImages[i].name === chosenImage) {
+    if (allImages[i].name === selectedImage) {
       allImages[i].voteCount++;
     }
   }
@@ -207,7 +221,9 @@ function handleClick() {
   if (clickCount < 25) {
     renderAllImages();
   } else {
-    imageBoxEl.removeEventListener('click', handleClick);
+    radioOneEl.removeEventListener('click', handleRadioClick);
+    radioTwoEl.removeEventListener('click', handleRadioClick);
+    radioThreeEl.removeEventListener('click', handleRadioClick);
     generateArrays();
     generateChart();
     generatePieChart();
@@ -221,15 +237,17 @@ function handleButtonClick() {
   location.reload();
 }
 
-
 // RENDER FUNCTIONS
 function renderImage(imageElement) {
   var pictureIndex = getRandomIndex();
   allImages[pictureIndex].viewCount++;
-  console.log(`view count of ${allImages[pictureIndex].name} is `, allImages[pictureIndex].viewCount);
+  var name = allImages[pictureIndex].name;
+  console.log(`view count of ${name} is `, allImages[pictureIndex].viewCount);
   imageElement.src = allImages[pictureIndex].filepath;
-  imageElement.alt = allImages[pictureIndex].name;
-  imageElement.title = allImages[pictureIndex].name;
+  imageElement.alt = name;
+  imageElement.title = name;
+  var divElement = imageElement.parentElement;
+  divElement.id = name;
 }
 
 function renderAllImages() {
@@ -239,8 +257,11 @@ function renderAllImages() {
 }
 
 // EVENT LISTENERS
-imageBoxEl.addEventListener('click', handleClick);
+radioOneEl.addEventListener('click', handleRadioClick);
+radioTwoEl.addEventListener('click', handleRadioClick);
+radioThreeEl.addEventListener('click', handleRadioClick);
 buttonEl.addEventListener('click', handleButtonClick);
+voteButtonEl.addEventListener('click', handleVote);
 
 renderAllImages();
 
