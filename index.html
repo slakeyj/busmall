@@ -17,22 +17,27 @@
   <main>
     <div id="image-box">
       <h2>Pick Your Favorite Image</h2>
-      <form>
-        <fieldset>
-          <div class="image-choice">
+      <fieldset>
+        <div class="image-choice">
+          <div class="image-height">
             <img id="image-one" src="" alt="" title="" />
-            <input type="radio" name="image-one" value="fiction">Select</input>
           </div>
-          <div class="image-choice">
+          <input type="radio" name="image" value="radioone" id="radio-one">Select</input>
+        </div>
+        <div class="image-choice">
+          <div class="image-height">
             <img id="image-two" src="" alt="" title="" />
-            <input type="radio" name="image-two" value="fiction">Select</input>
           </div>
-          <div class="image-choice">
+          <input type="radio" name="image" value="radiotwo" id="radio-two">Select</input>
+        </div>
+        <div class="image-choice">
+          <div class="image-height">
             <img id="image-three" src="" alt="" title="" />
-            <input type="radio" name="image-three" value="fiction">Select</input>
           </div>
-        </fieldset>
-      </form>
+          <input type="radio" name="image" value="radiothree" id="radio-three">Select</input>
+        </div>
+      </fieldset>
+      <button id="vote-button">Vote</button>
     </div>
 
     <div class="data-box">
@@ -41,6 +46,7 @@
     <div class="data-box">
       <canvas id="myPie" width="0"></canvas>
     </div>
+    <button id="clear-button">Clear Data</button>
   </main>
   <footer>
 
